@@ -107,6 +107,39 @@ const VipPackages: React.FC<VipPackagesProps> = ({ onSelectPackage, selectedPack
               {pkg.description}
             </Text>
 
+            {/* Таблица функций */}
+            <View style={VipPackagesStyles.featuresContainer}>
+              {packageFeatures.map((feature, featureIndex) => {
+                const featureIcon = getFeatureIcon(feature.name);
+                const isLastFeature = featureIndex === packageFeatures.length - 1;
+                return (
+                  <View key={featureIndex} style={[
+                    VipPackagesStyles.featureRow,
+                    isLastFeature && VipPackagesStyles.featureRowLast
+                  ]}>
+                    <View style={VipPackagesStyles.featureNameContainer}>
+                      <View style={[VipPackagesStyles.iconWrapper, { backgroundColor: featureIcon.color + '15' }]}>
+                        <Ionicons 
+                          name={featureIcon.name as any} 
+                          size={14} 
+                          color={featureIcon.color} 
+                        />
+                      </View>
+                      <Text style={[VipPackagesStyles.featureName, { color: currentColors.textSecondary }]}>
+                        {feature.name}
+                      </Text>
+                    </View>
+                    <View style={VipPackagesStyles.featureValueContainer}>
+                      {renderFeatureValue(
+                        getFeatureValue(feature, pkg.id), 
+                        pkg.id !== 'free'
+                      )}
+                    </View>
+                  </View>
+                );
+              })}
+            </View>
+
             <TouchableOpacity
               style={[VipPackagesStyles.priceButton, dynamicStyles.priceButton]}
               onPress={() => onSelectPackage(pkg.id, pkg.price)}

@@ -77,6 +77,17 @@ export const VipPackagesStyles = StyleSheet.create({
     fontSize: 26,
     fontWeight: '700',
   },
+  featureRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(0,0,0,0.05)',
+  },
+  featureRowLast: {
+    borderBottomWidth: 0,
+  },
 });
 
 export const getVipPackagesColors = (isDark: boolean) => {
