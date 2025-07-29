@@ -90,9 +90,10 @@ const VipPackages: React.FC<VipPackagesProps> = ({ onSelectPackage, selectedPack
         horizontal 
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={VipPackagesStyles.packagesScrollContent}
-        snapToInterval={320}
+        snapToInterval={366}
         decelerationRate="fast"
         snapToAlignment="center"
+        contentInsetAdjustmentBehavior="automatic"
       >
         {packages.map((pkg) => (
           <View

@@ -44,11 +44,14 @@ export const VipPackagesStyles = StyleSheet.create({
   },
   packageCard: {
     borderRadius: 16,
-    padding: 20,
-    marginHorizontal: 10,
+    paddingTop: 12,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+    marginHorizontal: 8,
     borderWidth: 2,
-    width: 300,
-    minHeight: 200,
+    width: 350,
+    height: 520,
+    justifyContent: 'space-between',
   },
   packageTitle: {
     fontSize: 20,
