@@ -12,6 +12,7 @@ import { PaymentHistory } from '../../mocks/paymentHistoryMock';
 import { useTheme } from '../../context/ThemeContext';
 import { useI18n } from '../../hooks/useI18n';
 import { colors } from '../../constants/colors';
+import { usePackage } from '../../hooks/usePackage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createCVVStickAnimation } from '../../styles/animations';
 import BalanceCardDecoration from '../../components/BalanceCardDecoration';
@@ -83,7 +84,7 @@ const BalanceScreen: React.FC<ClientScreenProps<'Balance'>> = ({ navigation }) =
   const [balance, setBalance] = useState('0');
   const [cashback, setCashback] = useState('0');
   const [topUpHistory, setTopUpHistory] = useState<PaymentHistory[]>([]);
-  const [currentPackage, setCurrentPackage] = useState<PackageType>('free');
+  const { currentPackage } = usePackage();
   React.useEffect(() => {
     (async () => {
       const storedBalance = await AsyncStorage.getItem(BALANCE_KEY);
@@ -273,12 +274,7 @@ const BalanceScreen: React.FC<ClientScreenProps<'Balance'>> = ({ navigation }) =
     });
   };
 
-  const handlePackageChange = () => {
-    const packages: PackageType[] = ['free', 'basic', 'premium', 'family'];
-    const currentIndex = packages.indexOf(currentPackage);
-    const nextIndex = (currentIndex + 1) % packages.length;
-    setCurrentPackage(packages[nextIndex]);
-  };
+
 
   return (
     <View style={[styles.container, balanceColors.container]}>
@@ -287,23 +283,23 @@ const BalanceScreen: React.FC<ClientScreenProps<'Balance'>> = ({ navigation }) =
           <Ionicons name="arrow-back" size={24} color={backIconColorValue} />
         </TouchableOpacity>
         <Text style={[styles.title, balanceColors.title]}>{t('client.balance.title')}</Text>
-        <TouchableOpacity onPress={handlePackageChange} style={styles.backButton}>
+        <View style={styles.backButton}>
           <Ionicons 
             name={
-              currentPackage === 'free' ? 'remove-circle' : 
-              currentPackage === 'basic' ? 'star' : 
-              currentPackage === 'premium' ? 'diamond' : 
-              'people'
+              currentPackage === 'free' ? 'leaf' : 
+              currentPackage === 'basic' ? 'shield' : 
+              currentPackage === 'premium' ? 'heart' : 
+              'diamond'
             } 
             size={24} 
             color={
-              currentPackage === 'free' ? '#6B7280' : 
+              currentPackage === 'free' ? '#10B981' : 
               currentPackage === 'basic' ? '#3B82F6' : 
               currentPackage === 'premium' ? '#8B5CF6' : 
               '#F59E0B'
             } 
           />
-        </TouchableOpacity>
+        </View>
       </View>
       
       <ScrollView style={styles.content} 

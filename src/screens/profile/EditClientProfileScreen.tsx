@@ -20,6 +20,7 @@ import VipSection from '../../components/profile/VipSection';
 import ProfileHeader from '../../components/profile/ProfileHeader';
 import { useI18n } from '../../hooks/useI18n';
 import { FamilyMember } from '../../types/family';
+import { usePackage } from '../../hooks/usePackage';
 
 const EditClientProfileScreen: React.FC<ClientScreenProps<'EditClientProfile'>> = ({ navigation }) => {
   const { isDark } = useTheme();
@@ -30,6 +31,7 @@ const EditClientProfileScreen: React.FC<ClientScreenProps<'EditClientProfile'>> 
   const currentColors = isDark ? { dark: { primary: '#3B82F6' } } : { light: { primary: '#083198' } };
   
   const { profile, updateProfile, loadProfile } = useProfile();
+  const { currentPackage } = usePackage();
   const user = profile || mockUsers[0];
   
   // Состояние формы
@@ -477,6 +479,7 @@ const EditClientProfileScreen: React.FC<ClientScreenProps<'EditClientProfile'>> 
           userSurname={user.surname}
           onCirclePress={handleCirclePressAction}
           rotateAnim={rotateAnim}
+          currentPackage={currentPackage}
         />
 
         <PersonalInfoSection
